@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from typing import Union
+from typing import Union, Tuple
 from overrides import overrides
 
 from linear import Linear
@@ -91,7 +91,11 @@ class RecurrentHighwayNetwork(nn.Module):
         # self.hidden_dim = out_features
 
     @overrides
-    def forward(self, input, hidden):
+    def forward(
+        self, 
+        input: torch.Tensor, 
+        hidden: torch.Tensor,
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
         # Expects input shape: (seq_len, bsz, input_dim)
         outputs = []
         for x in input:
