@@ -77,6 +77,8 @@ class MyLinear(nn.Module):
     def forward(self, input: torch.Tensor) -> torch.Tensor:
         if self.use_F:
             return F.linear(input, self.weight, self.bias)
+        # expected input shape is (b, m, n)
+        # since weight shape is (m, n), use matmul!
         output = input.matmul(self.weight.T)
         if self.bias is not None:
             output += self.bias
